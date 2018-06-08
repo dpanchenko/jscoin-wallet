@@ -6,16 +6,12 @@ class ErrorBoundary extends Component {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
-      info: null,
     };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch() {
     this.setState({
       hasError: true,
-      error,
-      info,
     });
   }
 

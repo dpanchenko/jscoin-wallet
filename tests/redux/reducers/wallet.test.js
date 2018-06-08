@@ -1,7 +1,5 @@
 import reducer, { initialState } from 'app/redux/reducers/wallet';
-import {
-  SET_WALLET,
-} from 'app/redux/constants';
+import { SET_WALLET } from 'app/redux/constants';
 
 const payload = 'test';
 

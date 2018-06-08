@@ -1,6 +1,4 @@
-import {
-  selectorWallet,
-} from 'app/redux/selectors/wallet';
+import { selectorWallet } from 'app/redux/selectors/wallet';
 
 import { initialState } from 'app/redux/reducers/wallet';
 

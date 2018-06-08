@@ -4,15 +4,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from 'app/redux/store';
 
-import Routes from 'app/routes';
-import ErrorBoundary from 'app/containers/ErrorBoundary';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'app/styles/app.less';
 
-// import 'app/styles/app.less';
+import Wallet from 'app/containers/Wallet';
+import ErrorBoundary from 'app/containers/ErrorBoundary';
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary>
-      <Routes />
+      <Wallet />
     </ErrorBoundary>
   </Provider>,
   document.getElementById('web-app'),
