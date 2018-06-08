@@ -17,8 +17,8 @@ async function checkStatus(response) {
   throw error;
 }
 
-export default function request(url, options) {
-  const completeUrl = `${baseUrl}${url}`;
+export default function request(url, options, fullUrl) {
+  const completeUrl = fullUrl ? url : `${baseUrl}${url}`;
   const fetchOptions = {
     ...options,
     headers: {

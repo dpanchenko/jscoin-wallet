@@ -10,7 +10,7 @@ import {
 } from 'app/redux/actions/wallet';
 import { selectorWallet } from 'app/redux/selectors/wallet';
 
-import api from 'app/utils/api/wallet';
+import api from 'app/utils/api';
 
 export function* getBalanceSaga() {
   try {
