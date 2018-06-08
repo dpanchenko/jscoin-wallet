@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: |
+          export BUILD_ENV=$(eval "echo ${CIRCLE_BRANCH}")
+          export BUILD_TAG=$(eval "echo ${CIRCLE_TAG}")
+          export BUILD_REPO=frontend
+          bash scripts/docker-image.sh
+
+workflows:
+  version: 2
+  deploy_to_docker:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - development
+            tags:
+              only: /^v.*/
