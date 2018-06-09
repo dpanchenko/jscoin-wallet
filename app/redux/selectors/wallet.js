@@ -7,17 +7,42 @@ export const selectorWallet = createSelector(
   state => state.wallet,
 );
 
-export const selectorBalance = createSelector(
+export const selectorConfirmed = createSelector(
   selector,
-  state => state.wallet,
+  state => state.confirmed,
 );
 
-export const selectorDebet = createSelector(
-  selector,
+export const selectorConfirmedBalance = createSelector(
+  selectorConfirmed,
+  state => state.amount,
+);
+
+export const selectorConfirmedDebet = createSelector(
+  selectorConfirmed,
   state => state.debet,
 );
 
-export const selectorCredit = createSelector(
+export const selectorConfirmedCredit = createSelector(
+  selectorConfirmed,
+  state => state.credit,
+);
+
+export const selectorPending = createSelector(
   selector,
+  state => state.pending,
+);
+
+export const selectorPendingBalance = createSelector(
+  selectorPending,
+  state => state.amount,
+);
+
+export const selectorPendingDebet = createSelector(
+  selectorPending,
+  state => state.debet,
+);
+
+export const selectorPendingCredit = createSelector(
+  selectorPending,
   state => state.credit,
 );

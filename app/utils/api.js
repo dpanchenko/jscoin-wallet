@@ -2,6 +2,6 @@ import request from 'app/utils/request';
 
 export default {
   nodes: () => request('/'),
-  balance: payload => request(`/balance/${payload.id}`),
-  transaction: payload => request(`/transaction/${payload}`),
+  balance: (wallet, url) => request(`${url}/balance/${wallet}`, null, true),
+  transaction: (payload, url) => request(`${url}/transaction`),
 };

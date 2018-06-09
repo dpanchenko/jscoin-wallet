@@ -20,8 +20,9 @@ export const getBalanceSuccess = payload => ({
   payload,
 });
 
-export const getBalanceFailed = () => ({
+export const getBalanceFailed = payload => ({
   type: GET_BALANCE_FAILED,
+  payload,
 });
 
 export const makeTransactionRequest = payload => ({

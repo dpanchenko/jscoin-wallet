@@ -6,9 +6,16 @@ import {
 
 export const initialState = {
   wallet: null,
-  balance: null,
-  debet: null,
-  credit: null,
+  confirmed: {
+    amount: null,
+    debet: null,
+    credit: null,
+  },
+  pending: {
+    amount: null,
+    debet: null,
+    credit: null,
+  },
 };
 
 export default function (state = initialState, action) {
@@ -20,20 +27,18 @@ export default function (state = initialState, action) {
       };
     }
     case GET_BALANCE_SUCCESS: {
-      const { balance, debet, credit } = action.payload;
+      const { confirmed, pending } = action.payload;
       return {
         ...state,
-        balance,
-        debet,
-        credit,
+        confirmed,
+        pending,
       };
     }
     case GET_BALANCE_FAILED: {
       return {
         ...state,
-        balance: null,
-        debet: null,
-        credit: null,
+        confirmed: initialState.confirmed,
+        pending: initialState.pending,
       };
     }
     default:

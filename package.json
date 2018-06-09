@@ -78,6 +78,7 @@
     "localStorage": "^1.0.3",
     "moment": "^2.22.2",
     "node-sass": "^4.9.0",
+    "npm": "^6.1.0",
     "popper.js": "^1.14.3",
     "query-string": "^6.1.0",
     "raf": "^3.4.0",
