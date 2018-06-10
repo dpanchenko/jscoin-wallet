@@ -62,8 +62,9 @@ export const getBlocksStart = () => ({
   type: GET_BLOCKS_START,
 });
 
-export const getBlocksSuccess = () => ({
+export const getBlocksSuccess = payload => ({
   type: GET_BLOCKS_SUCCESS,
+  payload,
 });
 
 export const getBlocksFailed = () => ({

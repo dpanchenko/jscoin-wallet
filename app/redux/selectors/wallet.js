@@ -57,3 +57,8 @@ export const selectorBlocks = createSelector(
   state => state.blocks,
 );
 
+export const selectorBlocksCount = createSelector(
+  selectorBlocks,
+  state => (state && state.length) || 0,
+);
+

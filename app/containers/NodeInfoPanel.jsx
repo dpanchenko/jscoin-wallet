@@ -7,10 +7,14 @@ import {
   selectorList as selectorNodesList,
   selectorError as selectorNodesError,
 } from 'app/redux/selectors/nodes';
+import {
+  selectorMining,
+  selectorBlocksCount,
+} from 'app/redux/selectors/wallet';
 
 export class NodeInfoPanel extends PureComponent {
   renderMessage() {
-    const { error, nodes } = this.props;
+    const { blocks, error, nodes, mining } = this.props;
     if (nodes && nodes.length === 0) {
       return <div className="alert alert-danger">Network is down</div>;
     }
@@ -18,7 +22,7 @@ export class NodeInfoPanel extends PureComponent {
       return <div className="alert alert-danger">Get nodes list failed</div>;
     }
     if (nodes && nodes.length > 0) {
-      return <div className="alert alert-primary">Node {nodes[0].address}</div>;
+      return <div className="alert alert-primary">Node {nodes[0].address} (blocks {blocks}){mining ? ' mining...':''}</div>;
     }
     return null;
   }
@@ -39,18 +43,22 @@ export class NodeInfoPanel extends PureComponent {
 }
 
 NodeInfoPanel.propTypes = {
+  blocks: PropTypes.number,
   error: PropTypes.bool,
   nodes: PropTypes.array,
+  mining: PropTypes.bool,
 };
 
 NodeInfoPanel.defaultProps = {
+  blocks: 0,
   error: false,
   nodes: null,
+  mining: false,
 };
 
 const mapStateToProps = createSelector(
-  [selectorNodesList, selectorNodesError],
-  (nodes, error) => ({ nodes, error }),
+  [selectorNodesList, selectorNodesError, selectorBlocksCount, selectorMining],
+  (nodes, error, blocks, mining) => ({ nodes, error, blocks, mining }),
 );
 
 

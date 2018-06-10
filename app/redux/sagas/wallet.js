@@ -83,8 +83,8 @@ export function* getBlocksSaga() {
     const nodes = yield select(selectorNodesList);
     const nodeUrl = (nodes && nodes[0] && nodes[0].address) || null;
     yield put(getBlocksStart());
-    const result = yield call(api.blocks, nodeUrl);
-    yield put(getBlocksSuccess(result));
+    const { blocks } = yield call(api.blocks, nodeUrl);
+    yield put(getBlocksSuccess(blocks));
   } catch (e) {
     yield put(getBlocksFailed());
   }
