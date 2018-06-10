@@ -46,3 +46,14 @@ export const selectorPendingCredit = createSelector(
   selectorPending,
   state => state.credit,
 );
+
+export const selectorMining = createSelector(
+  selector,
+  state => state.mining,
+);
+
+export const selectorBlocks = createSelector(
+  selector,
+  state => state.blocks,
+);
+

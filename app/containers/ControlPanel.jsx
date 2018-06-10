@@ -30,8 +30,8 @@ export class ControlPanel extends PureComponent {
   }
   handlerSendAmount(data) {
     const { actions } = this.props;
-    actions.wallet.getBalanceRequest();
     console.log('handlerSendAmount', data);
+    actions.wallet.makeTransactionRequest(data);
   }
   render() {
     const {
@@ -58,7 +58,7 @@ export class ControlPanel extends PureComponent {
         </div>
         <div className="row">
           <div className="col">
-            <TransactionForm wallet={wallet} handlerSendAmount={this.handlerSendAmount} />
+            <TransactionForm wallet={wallet} handleSendAmount={this.handlerSendAmount} />
           </div>
         </div>
         <div className="row">
@@ -74,11 +74,10 @@ export class ControlPanel extends PureComponent {
             <TransactionsList list={outgoing} />
           </div>
           <div className="col-3">
-            <div className="card text-right">
+            <div className="card text-center text-white bg-info">
               <div className="card-body">
                 <div className="card-title">Balance</div>
                 <p className="card-text">{confirmedBalance}{pendingBalance ? ` (pending ${pendingBalance})` : ''} coins</p>
-                <button className="btn btn-primary" onClick={this.handlerRefreshBalance}>Refresh</button>
               </div>
             </div>
           </div>

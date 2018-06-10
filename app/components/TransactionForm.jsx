@@ -9,8 +9,8 @@ import FormFieldInput from 'app/components/FormFieldInput';
 export const transferValidate = (values) => {
   const errors = {};
 
-  if (!values.wallet) {
-    errors.wallet = 'Required';
+  if (!values.target) {
+    errors.target = 'Required';
   }
 
   if (!values.amount) {
@@ -28,7 +28,10 @@ export class TransactionForm extends PureComponent {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onSubmit(data) {
-    console.log('Submit', data);
+    const { handleSendAmount } = this.props;
+    if (handleSendAmount) {
+      handleSendAmount(data);
+    }
   }
   render() {
     const { wallet, handleSubmit, invalid } = this.props;
@@ -41,8 +44,8 @@ export class TransactionForm extends PureComponent {
           </div>
           <Field
             component={FormFieldInput}
-            id="wallet"
-            name="wallet"
+            id="target"
+            name="target"
             label="To wallet"
             className="col-md-5"
             placeholder="Put target wallet here"

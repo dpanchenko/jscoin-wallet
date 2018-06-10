@@ -17,6 +17,17 @@ async function checkStatus(response) {
   throw error;
 }
 
+export const getOptions = (payload, method = 'POST', contentType = 'application/json') => {
+  const options = {
+    method,
+    headers: {
+      'Content-Type': contentType,
+    },
+    body: payload ? JSON.stringify(payload) : undefined,
+  };
+  return options;
+};
+
 export default function request(url, options, fullUrl) {
   const completeUrl = fullUrl ? url : `${baseUrl}${url}`;
   const fetchOptions = {

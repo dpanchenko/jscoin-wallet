@@ -3,8 +3,18 @@ import {
   SET_WALLET,
   GET_BALANCE_REQUEST,
   MAKE_TRANSACTION_REQUEST,
+  MINE_BLOCK_REQUEST,
+  GET_BLOCKS_REQUEST,
 } from 'app/redux/constants';
 import {
+  mineBlockRequest,
+  mineBlockStart,
+  mineBlockSuccess,
+  mineBlockFailed,
+  getBlocksRequest,
+  getBlocksStart,
+  getBlocksSuccess,
+  getBlocksFailed,
   getBalanceRequest,
   getBalanceSuccess,
   getBalanceFailed,
@@ -39,16 +49,44 @@ export function* makeTransactionSaga(action) {
   try {
     const { target, amount } = action.payload;
     const wallet = yield select(selectorWallet);
+    const nodes = yield select(selectorNodesList);
+    const nodeUrl = (nodes && nodes[0] && nodes[0].address) || null;
     if (wallet) {
-      yield call(api.wallet.transaction, {
+      yield call(api.transaction, {
         input: wallet,
         output: target,
         amount,
-      });
-      yield put(getBalanceRequest());
+      }, nodeUrl);
+      yield put(mineBlockRequest());
     }
   } catch (e) {
     yield put(getBalanceRequest());
+  }
+}
+
+export function* mineBlockSaga() {
+  try {
+    const nodes = yield select(selectorNodesList);
+    const nodeUrl = (nodes && nodes[0] && nodes[0].address) || null;
+    yield put(mineBlockStart());
+    yield call(api.mine, nodeUrl);
+    yield put(mineBlockSuccess());
+    yield put(getBalanceRequest());
+    yield put(getBlocksRequest());
+  } catch (e) {
+    yield put(mineBlockFailed());
+  }
+}
+
+export function* getBlocksSaga() {
+  try {
+    const nodes = yield select(selectorNodesList);
+    const nodeUrl = (nodes && nodes[0] && nodes[0].address) || null;
+    yield put(getBlocksStart());
+    const result = yield call(api.blocks, nodeUrl);
+    yield put(getBlocksSuccess(result));
+  } catch (e) {
+    yield put(getBlocksFailed());
   }
 }
 
@@ -56,4 +94,6 @@ export default function* () {
   yield takeEvery(SET_WALLET, setWalletSaga);
   yield takeEvery(GET_BALANCE_REQUEST, getBalanceSaga);
   yield takeEvery(MAKE_TRANSACTION_REQUEST, makeTransactionSaga);
+  yield takeEvery(MINE_BLOCK_REQUEST, mineBlockSaga);
+  yield takeEvery(GET_BLOCKS_REQUEST, getBlocksSaga);
 }

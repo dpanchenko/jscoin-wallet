@@ -2,6 +2,12 @@ import {
   SET_WALLET,
   GET_BALANCE_SUCCESS,
   GET_BALANCE_FAILED,
+  MINE_BLOCK_START,
+  MINE_BLOCK_SUCCESS,
+  MINE_BLOCK_FAILED,
+  GET_BLOCKS_START,
+  GET_BLOCKS_SUCCESS,
+  GET_BLOCKS_FAILED,
 } from 'app/redux/constants';
 
 export const initialState = {
@@ -16,6 +22,8 @@ export const initialState = {
     debet: null,
     credit: null,
   },
+  mining: false,
+  blocks: [],
 };
 
 export default function (state = initialState, action) {
@@ -39,6 +47,32 @@ export default function (state = initialState, action) {
         ...state,
         confirmed: initialState.confirmed,
         pending: initialState.pending,
+      };
+    }
+    case MINE_BLOCK_START: {
+      return {
+        ...state,
+        mining: true,
+      };
+    }
+    case MINE_BLOCK_FAILED:
+    case MINE_BLOCK_SUCCESS: {
+      return {
+        ...state,
+        mining: false,
+      };
+    }
+    case GET_BLOCKS_START:
+    case GET_BLOCKS_FAILED: {
+      return {
+        ...state,
+        blocks: [],
+      };
+    }
+    case GET_BLOCKS_SUCCESS: {
+      return {
+        ...state,
+        blocks: action.payload,
       };
     }
     default:
