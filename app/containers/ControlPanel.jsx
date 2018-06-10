@@ -30,7 +30,6 @@ export class ControlPanel extends PureComponent {
   }
   handlerSendAmount(data) {
     const { actions } = this.props;
-    console.log('handlerSendAmount', data);
     actions.wallet.makeTransactionRequest(data);
   }
   render() {

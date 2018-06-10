@@ -10,7 +10,8 @@
     "postinstall": "if [ $BUILD ]; then npm run build; fi",
     "build:clean": "rimraf ./public",
     "pretest": "npm run lint",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "forever": "forever server.js"
   },
   "repository": {
     "type": "git",
