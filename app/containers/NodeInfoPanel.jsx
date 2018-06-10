@@ -22,7 +22,7 @@ export class NodeInfoPanel extends PureComponent {
       return <div className="alert alert-danger">Get nodes list failed</div>;
     }
     if (nodes && nodes.length > 0) {
-      return <div className="alert alert-primary">Node {nodes[0].address} (blocks {blocks}){mining ? ' mining...':''}</div>;
+      return <div className="alert alert-primary">Node {nodes[0].address} (blocks {blocks}){mining ? ' mining...' : ''}</div>;
     }
     return null;
   }

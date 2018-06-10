@@ -1,9 +1,5 @@
-import { call, put, take, takeEvery } from 'redux-saga/effects';
-import {
-  GET_NODES_REQUEST,
-  GET_NODES_SUCCESS,
-  GET_NODES_FAILED,
-} from 'app/redux/constants';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { GET_NODES_REQUEST } from 'app/redux/constants';
 import {
   getNodesSuccess,
   getNodesFailed,
@@ -18,7 +14,6 @@ export function* getNodesSaga() {
   try {
     const response = yield call(api.nodes);
     yield put(getNodesSuccess(response));
-    // yield take([GET_NODES_SUCCESS, GET_NODES_FAILED]);
     yield put(getBlocksRequest());
   } catch (e) {
     yield put(getNodesFailed(e));
