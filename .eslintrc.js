@@ -23,6 +23,7 @@ module.exports = {
   rules: {
     'max-len': 0,
     'no-underscore-dangle': 0,
+    'object-curly-newline': 0,
     'import/no-extraneous-dependencies': 0,
     'import/prefer-default-export': 0,
     'import/no-unresolved': 0,

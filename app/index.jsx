@@ -8,13 +8,13 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'app/styles/app.less';
 
-import Wallet from 'app/containers/Wallet';
+import Layout from 'app/containers/Layout';
 import ErrorBoundary from 'app/containers/ErrorBoundary';
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary>
-      <Wallet />
+      <Layout />
     </ErrorBoundary>
   </Provider>,
   document.getElementById('web-app'),

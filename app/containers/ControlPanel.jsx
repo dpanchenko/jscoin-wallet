@@ -16,15 +16,22 @@ import {
 } from 'app/redux/selectors/wallet';
 
 import TransactionsList from 'app/components/TransactionsList';
+import TransactionForm from 'app/components/TransactionForm';
 
 export class ControlPanel extends PureComponent {
   constructor(props) {
     super(props);
     this.handlerRefreshBalance = this.handlerRefreshBalance.bind(this);
+    this.handlerSendAmount = this.handlerSendAmount.bind(this);
   }
   handlerRefreshBalance() {
     const { actions } = this.props;
     actions.wallet.getBalanceRequest();
+  }
+  handlerSendAmount(data) {
+    const { actions } = this.props;
+    actions.wallet.getBalanceRequest();
+    console.log('handlerSendAmount', data);
   }
   render() {
     const {
@@ -47,11 +54,15 @@ export class ControlPanel extends PureComponent {
     return (
       <Fragment>
         <div className="row">
+          <h3>Make payment</h3>
+        </div>
+        <div className="row">
           <div className="col">
-            <div className="alert alert-primary">
-              Wallet {wallet}
-            </div>
+            <TransactionForm wallet={wallet} handlerSendAmount={this.handlerSendAmount} />
           </div>
+        </div>
+        <div className="row">
+          <h3>Balance and statement</h3>
         </div>
         <div className="row">
           <div className="col">
@@ -95,8 +106,6 @@ ControlPanel.defaultProps = {
   pendingBalance: null,
   pendingCredit: null,
   pendingDebet: null,
-  error: false,
-  nodes: null,
   wallet: null,
 };
 
